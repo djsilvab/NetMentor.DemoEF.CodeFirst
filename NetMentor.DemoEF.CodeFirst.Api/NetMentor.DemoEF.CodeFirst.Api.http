@@ -1,0 +1,6 @@
+@NetMentor.DemoEF.CodeFirst.Api_HostAddress = http://localhost:5042
+
+GET {{NetMentor.DemoEF.CodeFirst.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
