@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NetMentor.DemoEF.CodeFirst.Data.Context;
-using NetMentor.DemoEF.CodeFirst.Data.Entities;
+using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
+using NetMentor.DemoEF.CodeFirst.Entities;
 
 namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 {
@@ -10,12 +9,13 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly NorthwindContext context;
+        private readonly IUserRepository userRepository;
 
-        public UsersController(NorthwindContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            this.context = context;
+            this.userRepository = userRepository;                
         }
+
 
         [HttpPost("create")]
         public async Task AddUser()
@@ -23,32 +23,29 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
             User usr1 = new User
             {
                 Email = $"{Guid.NewGuid()}@gmail.com",
-                UserName = "username",
+                UserName = "username-djsilvab",
                 WorkingExperiences = new List<WorkingExperience>
                 {
                     new WorkingExperience{
-                        Name = "experience-1",
-                        Details = "details-1",
-                        Environment = "Environment-1"
+                        Name = "experience-101",
+                        Details = "details-101",
+                        Environment = "Environment-101"
                     },
                     new WorkingExperience{
-                        Name = "experience-2",
-                        Details = "details-2",
-                        Environment = "Environment-2"
+                        Name = "experience-102",
+                        Details = "details-102",
+                        Environment = "Environment-102"
                     }
                 }
             };
 
-            await context.Users.AddAsync(usr1);
-            await context.SaveChangesAsync();
+            await userRepository.Create(usr1);
 
         }
 
         [HttpGet("{userId}")]
         public async Task<User?> GetOne(int userId)
-            => await context.Users
-                        .Include(x => x.WorkingExperiences)
-                        .FirstOrDefaultAsync(x => x.Id.Equals(userId));
+            => await userRepository.ReadById(userId);
         
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NetMentor.DemoEF.CodeFirst.Data.Entities;
+using NetMentor.DemoEF.CodeFirst.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

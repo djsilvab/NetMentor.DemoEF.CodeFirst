@@ -14,4 +14,8 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NetMentor.DemoEF.CodeFirst.Entities\NetMentor.DemoEF.CodeFirst.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

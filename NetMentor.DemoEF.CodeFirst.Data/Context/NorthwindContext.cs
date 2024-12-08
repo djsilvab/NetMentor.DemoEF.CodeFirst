@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
-using NetMentor.DemoEF.CodeFirst.Data.Entities;
+using NetMentor.DemoEF.CodeFirst.Entities;
 using NetMentor.DemoEF.CodeFirst.Data.Seeds;
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Context

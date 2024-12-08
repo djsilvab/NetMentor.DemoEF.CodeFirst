@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetMentor.DemoEF.CodeFirst.Data.Entities
+namespace NetMentor.DemoEF.CodeFirst.Entities
 {
     public class User
     {        

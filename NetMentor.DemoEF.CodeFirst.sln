@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMentor.DemoEF.CodeFirst.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMentor.DemoEF.CodeFirst.Data", "NetMentor.DemoEF.CodeFirst.Data\NetMentor.DemoEF.CodeFirst.Data.csproj", "{C414F7C0-1420-4C24-9CF1-46E98EFE11E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMentor.DemoEF.CodeFirst.Entities", "NetMentor.DemoEF.CodeFirst.Entities\NetMentor.DemoEF.CodeFirst.Entities.csproj", "{D02EBD54-34CA-44DC-9AAB-331DFA1E701C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C414F7C0-1420-4C24-9CF1-46E98EFE11E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C414F7C0-1420-4C24-9CF1-46E98EFE11E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C414F7C0-1420-4C24-9CF1-46E98EFE11E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D02EBD54-34CA-44DC-9AAB-331DFA1E701C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D02EBD54-34CA-44DC-9AAB-331DFA1E701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D02EBD54-34CA-44DC-9AAB-331DFA1E701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D02EBD54-34CA-44DC-9AAB-331DFA1E701C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
