@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
-using NetMentor.DemoEF.CodeFirst.Entities;
+using NetMentor.DemoEF.CodeFirst.Data.Services;
+using NetMentor.DemoEF.CodeFirst.Entities.Models;
 
 namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 {
@@ -10,14 +10,22 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository userRepository;
+        private readonly CreateUserWithExperiencesService userExperienceService;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserRepository userRepository,
+                                CreateUserWithExperiencesService userExperienceService
+        )
         {
             this.userRepository = userRepository;                
+            this.userExperienceService = userExperienceService;
         }
 
+        [HttpPost("{newId}")]
+        public async Task Create(int newId)
+            => await userExperienceService.Execute(newId);
 
-        [HttpPost("create")]
+
+        [HttpPost("add")]
         public async Task AddUser()
         {
             User usr1 = new User

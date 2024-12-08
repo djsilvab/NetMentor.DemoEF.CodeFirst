@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
-using NetMentor.DemoEF.CodeFirst.Entities;
 using NetMentor.DemoEF.CodeFirst.Data.Seeds;
+using NetMentor.DemoEF.CodeFirst.Entities.Models;
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Context
 {
