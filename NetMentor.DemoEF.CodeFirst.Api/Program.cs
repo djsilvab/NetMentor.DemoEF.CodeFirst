@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NetMentor.DemoEF.CodeFirst.Data.Connections;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
@@ -9,19 +10,24 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<NorthwindContext>(options => {
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+//builder.Services.AddDbContext<NorthwindContext>(options => {
+//    options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"));
+//});
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMySql(builder.Configuration);
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWorkingExperienceRepository, WorkingExperienceRepository>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<CreateUserWithExperiencesService>();
-
+builder.Services.AddScoped<InsertUserOnlyService>();
+builder.Services.AddScoped<UpdateUserAndEmailService>();
 
 var app = builder.Build();
 

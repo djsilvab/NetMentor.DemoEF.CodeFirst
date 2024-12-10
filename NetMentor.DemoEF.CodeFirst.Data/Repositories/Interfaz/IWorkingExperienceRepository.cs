@@ -9,6 +9,6 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz
 {
     public interface IWorkingExperienceRepository
     {
-        Task Create(List<WorkingExperience> workingExperiences);
+        Task CreateOne(List<WorkingExperience> workingExperiences);
     }
 }

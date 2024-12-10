@@ -47,13 +47,13 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
                 }
             };
 
-            await userRepository.Create(usr1);
+            await userRepository.CreateOne(usr1);
 
         }
 
         [HttpGet("{userId}")]
         public async Task<User?> GetOne(int userId)
-            => await userRepository.ReadById(userId);
+            => await userRepository.ReadOneById(userId);
         
     }
 }

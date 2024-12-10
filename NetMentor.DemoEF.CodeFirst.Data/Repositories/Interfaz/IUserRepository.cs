@@ -4,8 +4,10 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz
 {
     public interface IUserRepository
     {
-        Task<User> Create(User user);
-        Task<User?> ReadById(int id);
+        Task<User> CreateOne(User user);
+        Task<User?> ReadOneById(int id);
+        Task<List<User>> ReadAll();
+        Task UpdateOne(User user);
+        Task<bool> Delete(int userId);
     }
-
 }

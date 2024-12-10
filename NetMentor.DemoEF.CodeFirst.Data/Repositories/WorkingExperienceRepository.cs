@@ -18,7 +18,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
             this.context = context;
         }
 
-        public async Task Create(List<WorkingExperience> workingExperiences)
+        public async Task CreateOne(List<WorkingExperience> workingExperiences)
             => await context.WorkingExperiences.AddRangeAsync(workingExperiences);
     }
 }
