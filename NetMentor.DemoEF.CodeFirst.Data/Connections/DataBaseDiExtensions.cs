@@ -10,15 +10,18 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
     {
         public static void AddMySql(this IServiceCollection services, IConfiguration configuration)
         {
-            var ipServer = configuration["DataBase:Server"];
-            var AllowUserVariables = configuration.GetValue<bool>("DataBase:AllowUserVariables");
+            //var ipServer = configuration["DataBase:Server"];
+            //var AllowUserVariables = configuration.GetValue<bool>("DataBase:AllowUserVariables");
 
-            IConfigurationSection section = configuration.GetSection("DataBase");
-            var portServer = section.GetValue<int>("Port");
-            var dataBaseName = section.GetValue<string>("Name");
+            //IConfigurationSection section = configuration.GetSection("DataBase");
+            //var dbSettings = section.Get<DataBaseSettings>();
+            //var portServerX = dbSettings.Port;
 
-            DataBaseSettings dataBaseSettings = new();
-            configuration.Bind("DataBase", dataBaseSettings);
+            //var portServer = section.GetValue<int>("Port");
+            //var dataBaseName = section.GetValue<string>("Name");
+
+            //DataBaseSettings dataBaseSettings = new();
+            //configuration.Bind("DataBase", dataBaseSettings);
 
             services.AddDbContext<NorthwindContext>(options => {
                 options.UseMySQL(configuration.GetConnectionString("MySqlConnection"));

@@ -4,9 +4,11 @@ using NetMentor.DemoEF.CodeFirst.Data.Context;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
 using NetMentor.DemoEF.CodeFirst.Data.Services;
+using NetMentor.DemoEF.CodeFirst.Data.Services.Interfaz;
 using NetMentor.DemoEF.CodeFirst.Data.UnitOfWork;
-using System.Configuration;
+using NetMentor.DemoEF.CodeFirst.Entities.Settings;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,26 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<CreateUserWithExperiencesService>();
 builder.Services.AddScoped<InsertUserOnlyService>();
 builder.Services.AddScoped<UpdateUserAndEmailService>();
+
+//builder.Services.AddSingleton(x =>
+//{
+//    SmtpSettings smptSettings = new SmtpSettings();
+//    builder.Configuration.Bind("SmtpService", smptSettings);
+//    return smptSettings;
+//}).AddScoped<ISenderSmtpService,SenderSmptService>();
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpService"))
+    .PostConfigure<SmtpSettings>(config => {
+        if (string.IsNullOrEmpty(config.Servidor)) throw new Exception("El servidor está vacío");
+    });
+
+
+//==>
+//IOptions<SmtpSettings>
+//IOptionsSnapshot<SmtpSettings>
+//IOptionsMonitor<SmtpSettings>
+
+builder.Services.AddScoped<ISenderSmtpService, SenderSmptService>();
 
 var app = builder.Build();
 
