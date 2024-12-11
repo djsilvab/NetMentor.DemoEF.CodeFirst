@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NetMentor.DemoEF.CodeFirst.Entities.Settings;
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Connections
 {
@@ -14,6 +10,16 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
     {
         public static void AddMySql(this IServiceCollection services, IConfiguration configuration)
         {
+            var ipServer = configuration["DataBase:Server"];
+            var AllowUserVariables = configuration.GetValue<bool>("DataBase:AllowUserVariables");
+
+            IConfigurationSection section = configuration.GetSection("DataBase");
+            var portServer = section.GetValue<int>("Port");
+            var dataBaseName = section.GetValue<string>("Name");
+
+            DataBaseSettings dataBaseSettings = new();
+            configuration.Bind("DataBase", dataBaseSettings);
+
             services.AddDbContext<NorthwindContext>(options => {
                 options.UseMySQL(configuration.GetConnectionString("MySqlConnection"));
             });

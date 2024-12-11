@@ -5,6 +5,7 @@ using NetMentor.DemoEF.CodeFirst.Data.Repositories;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
 using NetMentor.DemoEF.CodeFirst.Data.Services;
 using NetMentor.DemoEF.CodeFirst.Data.UnitOfWork;
+using System.Configuration;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<NorthwindContext>(options => {
 //    options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"));
 //});
+
 
 builder.Services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
