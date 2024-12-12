@@ -9,5 +9,6 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz
         Task<List<User>> ReadAll();
         Task UpdateOne(User user);
         Task<bool> Delete(int userId);
+        Task<List<User>> ReadAllWithPagination(int pageNumber, int pageSize, string emailFilter);
     }
 }

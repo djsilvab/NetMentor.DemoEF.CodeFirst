@@ -61,20 +61,7 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
         [HttpGet("iqueryablepagination")]
         public async Task<ActionResult<List<User>>> QueryablePagination(int pageNumber, int pageSize, string emailFilter)
         {
-            var allUsers = await userRepository.ReadAll();
-
-            IQueryable<User> queryable = allUsers.AsQueryable();   
-
-            if (!string.IsNullOrEmpty(emailFilter))
-            {
-                queryable = queryable.Where(x => x.Email.Contains(emailFilter, StringComparison.OrdinalIgnoreCase));
-            }
-
-            queryable = queryable.Skip((pageNumber - 1) * pageSize)
-                 .Take(pageSize);
-
-            return queryable.ToList();
-                              
+            return await userRepository.ReadAllWithPagination(pageNumber, pageSize, emailFilter);                              
         }
         
     }

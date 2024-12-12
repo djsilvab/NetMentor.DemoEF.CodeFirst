@@ -28,6 +28,19 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
         public async Task<List<User>> ReadAll()
             => await context.Users.ToListAsync();
 
+        public async Task<List<User>> ReadAllWithPagination(int pageNumber, int pageSize, string emailFilter)
+        {
+            IQueryable<User> queryable = context.Users;
+
+            if (!string.IsNullOrEmpty(emailFilter)) 
+                queryable = queryable.Where(x => x.Email.Contains(emailFilter, StringComparison.OrdinalIgnoreCase));
+
+            queryable = queryable.Skip((pageNumber - 1) * pageSize)
+                                 .Take(pageSize);
+
+            return await queryable.ToListAsync();
+        }
+
         public async Task UpdateOne(User user)
             => await Task.FromResult(() => context.Users.Update(user));
 
