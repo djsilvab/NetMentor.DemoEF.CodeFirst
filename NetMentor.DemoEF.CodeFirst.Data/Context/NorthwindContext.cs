@@ -29,7 +29,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Context
             //    );
 
             //builder.ApplyConfigurationsFromAssembly(); //=> net 2.2
-            //builder.ApplyConfiguration(new UserSeed());
+            builder.ApplyConfiguration(new UserSeed());
 
         }
 

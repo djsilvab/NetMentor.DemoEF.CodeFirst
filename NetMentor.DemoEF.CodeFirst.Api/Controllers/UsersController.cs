@@ -2,6 +2,9 @@
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
 using NetMentor.DemoEF.CodeFirst.Data.Services;
 using NetMentor.DemoEF.CodeFirst.Entities.Models;
+using System.Linq;
+using System.Collections.Generic;
+
 
 namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 {
@@ -54,6 +57,25 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
         [HttpGet("{userId}")]
         public async Task<User?> GetOne(int userId)
             => await userRepository.ReadOneById(userId);
+
+        [HttpGet("iqueryablepagination")]
+        public async Task<ActionResult<List<User>>> QueryablePagination(int pageNumber, int pageSize, string emailFilter)
+        {
+            var allUsers = await userRepository.ReadAll();
+
+            IQueryable<User> queryable = allUsers.AsQueryable();   
+
+            if (!string.IsNullOrEmpty(emailFilter))
+            {
+                queryable = queryable.Where(x => x.Email.Contains(emailFilter, StringComparison.OrdinalIgnoreCase));
+            }
+
+            queryable = queryable.Skip((pageNumber - 1) * pageSize)
+                 .Take(pageSize);
+
+            return queryable.ToList();
+                              
+        }
         
     }
 }
