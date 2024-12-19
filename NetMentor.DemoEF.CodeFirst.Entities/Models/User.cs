@@ -11,6 +11,6 @@ namespace NetMentor.DemoEF.CodeFirst.Entities.Models
         [MaxLength(50)]
         public string Email { get; set; }
 
-        public ICollection<WorkingExperience> WorkingExperiences { get; set; }
+        public virtual ICollection<WorkingExperience> WorkingExperiences { get; set; }
     }
 }

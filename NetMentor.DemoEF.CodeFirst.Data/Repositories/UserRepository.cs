@@ -23,7 +23,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
         }        
 
         public async Task<User?> ReadOneById(int id)
-            => await context.Users.Include(x => x.WorkingExperiences).FirstOrDefaultAsync(x => x.Id == id);
+            => await context.Users
+                            .Include(x => x.WorkingExperiences)
+                            .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<List<User>> ReadAll()
             => await context.Users.ToListAsync();

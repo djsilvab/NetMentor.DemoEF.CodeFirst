@@ -24,7 +24,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
             //configuration.Bind("DataBase", dataBaseSettings);
 
             services.AddDbContext<NorthwindContext>(options => {
-                options.UseMySQL(configuration.GetConnectionString("MySqlConnection"));
+                options
+                    .UseLazyLoadingProxies()
+                    .UseMySQL(configuration.GetConnectionString("MySqlConnection"));
             });
         }
 
