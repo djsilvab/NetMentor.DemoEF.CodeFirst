@@ -23,6 +23,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<User>()
+            //        .HasQueryFilter(a => a.State > 0);
+
+            //builder.Entity<User>()
             //    .HasData(
             //        new User { UserId = 1, Name = "User-1", Email = "user_1@gmail.com" },
             //        new User { UserId = 2, Name = "User-2", Email = "user_2@gmail.com" }

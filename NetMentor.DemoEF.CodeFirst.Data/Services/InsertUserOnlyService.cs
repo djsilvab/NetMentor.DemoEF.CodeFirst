@@ -47,9 +47,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Services
                 }
             };
 
-            _ = await unitOfWork.UserRepository.CreateOne(user);
+            await unitOfWork.UserRepository.CreateOne(user);
             await unitOfWork.WorkingExperienceRepository.CreateOne(workingExperiences);
-            _ = await unitOfWork.Save();
+            await unitOfWork.Save();
             return true;
         }
 

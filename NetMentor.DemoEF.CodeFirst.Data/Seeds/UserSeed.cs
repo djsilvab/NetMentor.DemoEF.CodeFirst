@@ -8,6 +8,8 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Seeds
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasQueryFilter(a => a.State > 0);
+
             builder.HasData(
                BuildUsers()               
            );
