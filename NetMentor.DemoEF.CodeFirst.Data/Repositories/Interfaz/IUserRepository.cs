@@ -2,13 +2,9 @@
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz
 {
-    public interface IUserRepository
-    {
-        Task<User> CreateOne(User user);
-        Task<User?> ReadOneById(int id);
-        Task<List<User>> ReadAll();
-        Task UpdateOne(User user);
-        Task<bool> Delete(int userId);
+    public interface IUserRepository : IGenericRepository<User, int>
+    {   
         Task<List<User>> ReadAllWithPagination(int pageNumber, int pageSize, string emailFilter);
+        Task<User?> ReadOneByIdWithWorkingExperiences(int userId);
     }
 }

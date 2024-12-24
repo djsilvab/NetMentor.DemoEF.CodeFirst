@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NetMentor.DemoEF.CodeFirst.Data.Services;
 using NetMentor.DemoEF.CodeFirst.Data.UnitOfWork;
 using NetMentor.DemoEF.CodeFirst.Entities.Models;
@@ -26,7 +27,7 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 
         [HttpGet]
         public async Task<List<User>> ReadAll()
-            => await unitOfWork.UserRepository.ReadAll();
+            => await unitOfWork.UserRepository.ReadAll().ToListAsync();
 
         [HttpGet("userId")]
         public async Task<User?> ReadOneById(int userId)
@@ -43,7 +44,7 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
         [HttpDelete("userId")]
         public async Task<bool> Delete(int userId)
         {
-            _ = await unitOfWork.UserRepository.Delete(userId);
+            _ = await unitOfWork.UserRepository.DeleteOneSof(userId);
             await unitOfWork.Save();
             return true;
         }            

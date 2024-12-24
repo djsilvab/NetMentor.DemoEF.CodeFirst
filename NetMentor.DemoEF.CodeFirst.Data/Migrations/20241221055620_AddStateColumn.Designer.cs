@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
 
@@ -10,9 +11,11 @@ using NetMentor.DemoEF.CodeFirst.Data.Context;
 namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    partial class NorthwindContextModelSnapshot : ModelSnapshot
+    [Migration("20241221055620_AddStateColumn")]
+    partial class AddStateColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -439,9 +442,6 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DeletedTimeUtc")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("Details")
                         .HasColumnType("longtext");
 
@@ -457,9 +457,6 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint unsigned");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

@@ -23,7 +23,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Services
             if (user != null)
             {
                 user.Email = newEmail;
-                await unitOfWork.UserRepository.UpdateOne(user);
+                unitOfWork.UserRepository.UpdateOne(user);
                 await unitOfWork.Save();
             }
             return true;

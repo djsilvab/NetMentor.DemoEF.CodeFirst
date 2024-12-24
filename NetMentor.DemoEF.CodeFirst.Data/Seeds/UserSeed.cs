@@ -9,9 +9,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Seeds
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasData(
-               //new User { Id = 2, Name = "User-2", Email = "user_2@gmail.com" },
-               //new User { Id = 3, Name = "User-3", Email = "user_3@gmail.com" }
-               BuildUsers()
+               BuildUsers()               
            );
 
             //builder.Property(c => c.Name).HasMaxLength(100).IsRequired();
@@ -24,11 +22,12 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Seeds
             {
                 users.Add(new User
                 {
-                    Email = $"example-{index}@gmail.com",
-                    Id = index ,
-                    UserName =$"user-name-{index}" 
+                    Id = index,
+                    Email = $"example-{index}@gmail.com",                    
+                    UserName =$"user-name-{index}",
+                    State = 1
                 });
-            }
+            }            
 
             return users;
         }
