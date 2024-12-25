@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using NetMentor.DemoEF.CodeFirst.Data.Seeds;
 using NetMentor.DemoEF.CodeFirst.Entities.Models;
+using NetMentor.DemoEF.CodeFirst.Entities.ResponseBD;
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Context
 {
@@ -19,6 +20,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<WorkingExperience> WorkingExperiences { get; set; }
+        public DbSet<UserResponse> UsersResponseSP { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
