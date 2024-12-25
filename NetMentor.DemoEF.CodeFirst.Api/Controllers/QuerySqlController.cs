@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
 using NetMentor.DemoEF.CodeFirst.Entities.Models;
-using NetMentor.DemoEF.CodeFirst.Entities.ResponseBD;
+using NetMentor.DemoEF.CodeFirst.Entities.ResponseBd;
 
 namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 {
@@ -19,10 +19,10 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
         }
 
         [HttpGet("raw-sq/{userId}")]
-        public async Task<UserResponse?> GetById(int userId)
+        public async Task<UserResponseBd?> GetById(int userId)
         {
             var result = await context
-                     .UsersResponseSP
+                     .UsersResponseBd
                      .FromSqlInterpolated($"CALL usp_ObtenerUsuarios({userId})")
                      .ToListAsync();
 

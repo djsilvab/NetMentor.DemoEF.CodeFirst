@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetMentor.DemoEF.CodeFirst.Entities.ResponseBD
+namespace NetMentor.DemoEF.CodeFirst.Entities.ResponseBd
 {
-    public class UserResponse
+    public class UserResponseBd
     {
         public int Id { get; set; }
         public string UserName { get; set; }

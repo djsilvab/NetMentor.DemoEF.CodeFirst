@@ -19,7 +19,8 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 
         [HttpGet("eager-loading")]
         public async Task<List<User>> EagerLoading()
-            => await context.Users
+            => await context
+                      .Users
                       .Include(x => x.WorkingExperiences)
                       .ToListAsync();
 
