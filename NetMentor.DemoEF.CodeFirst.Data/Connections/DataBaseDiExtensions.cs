@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
@@ -24,10 +25,11 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
             //DataBaseSettings dataBaseSettings = new();
             //configuration.Bind("DataBase", dataBaseSettings);
 
-            services.AddDbContext<NorthwindContext>(options => {
+            services.AddDbContext<NorthwindContext>((serviceProvider,options) => {
                     options
                     .UseLazyLoadingProxies()
-                    .AddInterceptors(new ReadExampleInterceptor())
+                    .AddInterceptors(new ReadExampleInterceptor(), 
+                        new SecondLevelCacheInterceptor(serviceProvider.GetRequiredService<IMemoryCache>()))
                     .UseMySQL(configuration.GetConnectionString("MySqlConnection"));
             });
         }

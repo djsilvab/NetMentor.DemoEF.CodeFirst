@@ -24,6 +24,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMemoryCache();
 builder.Services.AddMySql(builder.Configuration);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<CreateUserWithExperiencesService>();
 builder.Services.AddScoped<InsertUserOnlyService>();
 builder.Services.AddScoped<UpdateUserAndEmailService>();
+
 
 //builder.Services.AddSingleton(x =>
 //{
