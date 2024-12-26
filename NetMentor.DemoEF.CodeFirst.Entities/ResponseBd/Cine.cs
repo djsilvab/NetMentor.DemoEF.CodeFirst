@@ -10,7 +10,7 @@ namespace NetMentor.DemoEF.CodeFirst.Entities.ResponseBd
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public HashSet<SalaDeCine> SalasDeCine { get; set; }
+        public virtual HashSet<SalaDeCine> SalasDeCine { get; set; }
 
 
     }

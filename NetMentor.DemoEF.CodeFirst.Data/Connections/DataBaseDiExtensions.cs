@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
+using NetMentor.DemoEF.CodeFirst.Data.Interceptors;
 using NetMentor.DemoEF.CodeFirst.Entities.Settings;
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Connections
@@ -24,8 +25,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
             //configuration.Bind("DataBase", dataBaseSettings);
 
             services.AddDbContext<NorthwindContext>(options => {
-                options
+                    options
                     .UseLazyLoadingProxies()
+                    .AddInterceptors(new ReadExampleInterceptor())
                     .UseMySQL(configuration.GetConnectionString("MySqlConnection"));
             });
         }

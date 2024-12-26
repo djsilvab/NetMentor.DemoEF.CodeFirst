@@ -8,5 +8,6 @@ namespace NetMentor.DemoEF.CodeFirst.Entities.ResponseBd
 {
     public class TipoSalaDeCine
     {
+        public int Id { get; set; }
     }
 }
