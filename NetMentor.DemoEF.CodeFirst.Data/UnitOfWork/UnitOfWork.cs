@@ -1,4 +1,5 @@
-﻿using NetMentor.DemoEF.CodeFirst.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using NetMentor.DemoEF.CodeFirst.Data.Context;
 using NetMentor.DemoEF.CodeFirst.Data.Repositories.Interfaz;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,19 @@ namespace NetMentor.DemoEF.CodeFirst.Data.UnitOfWork
             this.WorkingExperienceRepository = WorkingExperienceRepository;
         }
 
-        public async Task<int> Save() =>
-            await context.SaveChangesAsync();
-        
+        public async Task<int> Save()
+        {            
+            try
+            {
+                return await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                Console.WriteLine("Conflicto de concurrencia");                  
+            }
+            return 0;
+        }
+
         public void Dispose() => context.Dispose();
     }
 }

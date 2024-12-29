@@ -24,7 +24,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
         }
 
         public async Task<T?> ReadOneById(TId id)
-            => await Entities.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            => await Entities.FirstOrDefaultAsync(x => x.Id.Equals(id));                     
 
         public IQueryable<T> ReadAll()
            => Entities;
@@ -37,6 +37,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
 
         public void UpdateOne(T value)
         {
+            value.LastUpdateTimeUtc = DateTime.UtcNow;
             Entities.Update(value);
         }
 

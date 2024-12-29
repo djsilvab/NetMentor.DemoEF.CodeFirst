@@ -10,6 +10,10 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Seeds
         {
             builder.HasQueryFilter(a => a.State > 0);
 
+            builder.Property(e => e.LastUpdateTimeUtc)
+                   .ValueGeneratedOnAddOrUpdate()
+                   .IsConcurrencyToken();
+
             builder.HasData(
                BuildUsers()               
            );

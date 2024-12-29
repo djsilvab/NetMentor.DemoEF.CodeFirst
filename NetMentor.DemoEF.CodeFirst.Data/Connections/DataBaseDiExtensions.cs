@@ -28,8 +28,8 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Connections
             services.AddDbContext<NorthwindContext>((serviceProvider,options) => {
                     options
                     .UseLazyLoadingProxies()
-                    .AddInterceptors(new ReadExampleInterceptor(), 
-                        new SecondLevelCacheInterceptor(serviceProvider.GetRequiredService<IMemoryCache>()))
+                    //.AddInterceptors(new ReadExampleInterceptor(), 
+                    //                 new SecondLevelCacheInterceptor(serviceProvider.GetRequiredService<IMemoryCache>()))
                     .UseMySQL(configuration.GetConnectionString("MySqlConnection"));
             });
         }

@@ -47,7 +47,15 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
             _ = await unitOfWork.UserRepository.DeleteOneSof(userId);
             await unitOfWork.Save();
             return true;
-        }            
-            
+        }
+
+        [HttpPut("concurrency/update-email/{userId}")]
+        public async Task<bool> UpdateEmail(int userId, string newEmail)
+        {
+            Thread.Sleep(10000); 
+            await updateUserAndEmailService.Execute(userId, newEmail);
+            return true;
+        }
+
     }
 }
