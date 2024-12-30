@@ -52,8 +52,16 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
         [HttpPut("concurrency/update-email/{userId}")]
         public async Task<bool> UpdateEmail(int userId, string newEmail)
         {
-            Thread.Sleep(10000); 
-            await updateUserAndEmailService.Execute(userId, newEmail);
+            User? user = await unitOfWork.UserRepository.ReadOneById(userId);
+            if (user != null)
+            {
+                //Sleep 10 seconds to be able to test the concurrency issue
+                Thread.Sleep(10000);
+                user.Email = newEmail;
+                unitOfWork.UserRepository.UpdateOne(user);
+                await unitOfWork.Save();
+            }
+
             return true;
         }
 

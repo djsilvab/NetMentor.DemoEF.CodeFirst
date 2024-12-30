@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetMentor.DemoEF.CodeFirst.Data.Context;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    [Migration("20241226033730_AddPelicula")]
-    partial class AddPelicula
+    [Migration("20241230053715_CargaInicial")]
+    partial class CargaInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,18 +21,17 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.8")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("GeneroPelicula", b =>
                 {
                     b.Property<int>("GenerosId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("PeliculasId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("GenerosId", "PeliculasId");
 
@@ -44,20 +44,26 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DeletedTimeUtc")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("LastUpdateTimeUtc")
+                        .IsConcurrencyToken()
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<byte>("State")
-                        .HasColumnType("tinyint unsigned");
+                        .HasColumnType("smallint");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -68,6 +74,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 5,
                             Email = "example-5@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-5"
                         },
@@ -75,6 +82,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 6,
                             Email = "example-6@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-6"
                         },
@@ -82,6 +90,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 7,
                             Email = "example-7@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-7"
                         },
@@ -89,6 +98,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 8,
                             Email = "example-8@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-8"
                         },
@@ -96,6 +106,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 9,
                             Email = "example-9@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-9"
                         },
@@ -103,6 +114,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 10,
                             Email = "example-10@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-10"
                         },
@@ -110,6 +122,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 11,
                             Email = "example-11@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-11"
                         },
@@ -117,6 +130,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 12,
                             Email = "example-12@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-12"
                         },
@@ -124,6 +138,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 13,
                             Email = "example-13@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-13"
                         },
@@ -131,6 +146,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 14,
                             Email = "example-14@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-14"
                         },
@@ -138,6 +154,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 15,
                             Email = "example-15@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-15"
                         },
@@ -145,6 +162,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 16,
                             Email = "example-16@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-16"
                         },
@@ -152,6 +170,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 17,
                             Email = "example-17@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-17"
                         },
@@ -159,6 +178,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 18,
                             Email = "example-18@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-18"
                         },
@@ -166,6 +186,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 19,
                             Email = "example-19@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-19"
                         },
@@ -173,6 +194,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 20,
                             Email = "example-20@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-20"
                         },
@@ -180,6 +202,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 21,
                             Email = "example-21@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-21"
                         },
@@ -187,6 +210,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 22,
                             Email = "example-22@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-22"
                         },
@@ -194,6 +218,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 23,
                             Email = "example-23@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-23"
                         },
@@ -201,6 +226,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 24,
                             Email = "example-24@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-24"
                         },
@@ -208,6 +234,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 25,
                             Email = "example-25@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-25"
                         },
@@ -215,6 +242,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 26,
                             Email = "example-26@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-26"
                         },
@@ -222,6 +250,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 27,
                             Email = "example-27@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-27"
                         },
@@ -229,6 +258,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 28,
                             Email = "example-28@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-28"
                         },
@@ -236,6 +266,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 29,
                             Email = "example-29@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-29"
                         },
@@ -243,6 +274,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 30,
                             Email = "example-30@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-30"
                         },
@@ -250,6 +282,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 31,
                             Email = "example-31@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-31"
                         },
@@ -257,6 +290,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 32,
                             Email = "example-32@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-32"
                         },
@@ -264,6 +298,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 33,
                             Email = "example-33@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-33"
                         },
@@ -271,6 +306,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 34,
                             Email = "example-34@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-34"
                         },
@@ -278,6 +314,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 35,
                             Email = "example-35@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-35"
                         },
@@ -285,6 +322,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 36,
                             Email = "example-36@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-36"
                         },
@@ -292,6 +330,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 37,
                             Email = "example-37@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-37"
                         },
@@ -299,6 +338,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 38,
                             Email = "example-38@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-38"
                         },
@@ -306,6 +346,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 39,
                             Email = "example-39@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-39"
                         },
@@ -313,6 +354,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 40,
                             Email = "example-40@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-40"
                         },
@@ -320,6 +362,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 41,
                             Email = "example-41@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-41"
                         },
@@ -327,6 +370,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 42,
                             Email = "example-42@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-42"
                         },
@@ -334,6 +378,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 43,
                             Email = "example-43@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-43"
                         },
@@ -341,6 +386,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 44,
                             Email = "example-44@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-44"
                         },
@@ -348,6 +394,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 45,
                             Email = "example-45@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-45"
                         },
@@ -355,6 +402,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 46,
                             Email = "example-46@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-46"
                         },
@@ -362,6 +410,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 47,
                             Email = "example-47@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-47"
                         },
@@ -369,6 +418,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 48,
                             Email = "example-48@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-48"
                         },
@@ -376,6 +426,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 49,
                             Email = "example-49@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-49"
                         },
@@ -383,6 +434,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 50,
                             Email = "example-50@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-50"
                         },
@@ -390,6 +442,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 51,
                             Email = "example-51@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-51"
                         },
@@ -397,6 +450,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 52,
                             Email = "example-52@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-52"
                         },
@@ -404,6 +458,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 53,
                             Email = "example-53@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-53"
                         },
@@ -411,6 +466,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 54,
                             Email = "example-54@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-54"
                         },
@@ -418,6 +474,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 55,
                             Email = "example-55@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-55"
                         },
@@ -425,6 +482,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 56,
                             Email = "example-56@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-56"
                         },
@@ -432,6 +490,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 57,
                             Email = "example-57@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-57"
                         },
@@ -439,6 +498,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 58,
                             Email = "example-58@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-58"
                         },
@@ -446,6 +506,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                         {
                             Id = 59,
                             Email = "example-59@gmail.com",
+                            LastUpdateTimeUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = (byte)1,
                             UserName = "user-name-59"
                         });
@@ -455,32 +516,38 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DeletedTimeUtc")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Details")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Environment")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("LastUpdateTimeUtc")
+                        .IsConcurrencyToken()
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<byte>("State")
-                        .HasColumnType("tinyint unsigned");
+                        .HasColumnType("smallint");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -493,16 +560,18 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Biografia")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("FechaNacimiento")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -513,10 +582,12 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -527,10 +598,12 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -541,19 +614,21 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("EnCartelera")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("FechaEstreno")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PosterURL")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -564,19 +639,21 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ActorId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Orden")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("PeliculaId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Personaje")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -591,16 +668,18 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CineId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("Precio")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<int?>("TipoSalaDeCineId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -615,7 +694,9 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.HasKey("Id");
 
@@ -626,16 +707,18 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.Property<byte>("State")
-                        .HasColumnType("tinyint unsigned");
+                        .HasColumnType("smallint");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("longtext");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -645,10 +728,10 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Migrations
             modelBuilder.Entity("PeliculaSalaDeCine", b =>
                 {
                     b.Property<int>("PeliculasId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("SalasDeCineId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("PeliculasId", "SalasDeCineId");
 
