@@ -23,7 +23,7 @@ namespace NetMentor.DemoEF.CodeFirst.Data.Repositories
             this.context = context;
         }
 
-        public async Task<T?> ReadOneById(TId id)
+        public virtual async Task<T?> ReadOneById(TId id)
             => await Entities.FirstOrDefaultAsync(x => x.Id.Equals(id));                     
 
         public IQueryable<T> ReadAll()

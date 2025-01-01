@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NetMentor.DemoEF.CodeFirst.Data.Services;
 using NetMentor.DemoEF.CodeFirst.Data.UnitOfWork;
 using NetMentor.DemoEF.CodeFirst.Entities.Models;
+using ROP;
 
 namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 {
@@ -64,6 +65,10 @@ namespace NetMentor.DemoEF.CodeFirst.Api.Controllers
 
             return true;
         }
+
+        [HttpGet("onlyuser/{userId}")]
+        public async Task<User?> GetOnlyUserId(int userId)
+            => await unitOfWork.UserRepository.ReadOneById(userId);
 
     }
 }
